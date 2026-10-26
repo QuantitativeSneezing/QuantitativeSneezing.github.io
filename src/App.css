@@ -182,3 +182,6 @@
     border-right-color: var(--border);
   }
 }
+.hero{
+  font-size: var(--step-2);
+}
