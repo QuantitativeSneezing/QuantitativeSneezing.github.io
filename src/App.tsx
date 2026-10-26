@@ -7,6 +7,9 @@ import stormLibrary from './assets/projects/Storm/library screencap.webp'
 import eriscordServer from './assets/projects/Eriscord/eriscord server.webp'
 import eriscordLogin from './assets/projects/Eriscord/eriscord pre login.webp'
 import eriscordDm from './assets/projects/Eriscord/eriscord DM.webp'
+import perceptronConfusion50 from './assets/projects/Perceptron/Confusion_50.webp'
+import perceptronConfusion from './assets/projects/Perceptron/Confusion_matrix.webp'
+import perceptronCorrelation from './assets/projects/Perceptron/Correlation_matrix.webp'
 
 type Screenshot = {
   src: string
@@ -25,7 +28,7 @@ const projects: Project[] = [
     name: 'Storm',
     href: 'https://storm-eoz3.onrender.com/',
     description: [
-      "Storm is a full stack clone of Steam, the e-commerce gaming platform. I wanted to clone Steam since it's an interesting mix of an e-commerce platform, with its initial (and still primary) feature being an online video game storefront, and a social network, given the rich community and friend features added by Valve over time. As of the latest update of this website, the live Storm site can buy (unplayable) fake games, as well as leave real reviews on those games. Planned features are the ability to make friends with other users and give them unique nicknames; the ability to send, edit and delete direct messages to users who are your friends; the ability to wishlist and search for games you might enjoy; and (if I get overambitious) the ability to make community groups with members in them and socialize with other Storm users.",
+      "Storm is a full stack clone of Steam, the e-commerce gaming platform. I wanted to clone Steam since it's an interesting mix of an e-commerce platform, with its initial (and still primary) feature being an online video game storefront, and a social network, given the rich community and friend features added by Valve over time. Users can (mock) purchase games and leave reviews on them.",
       "Storm was built using a React frontend and a Flask/SQLAlchemy backend. I'm quite fond of Python in general (features like list comprehension are quite nice), and Flask was a particularly nice fit here because of how easily I could match my API routes to my intended Redux state shape during the project.",
     ],
     screenshots: [
@@ -45,6 +48,18 @@ const projects: Project[] = [
       { src: eriscordServer, alt: 'Server messages' },
       { src: eriscordLogin, alt: 'Login splash' },
       { src: eriscordDm, alt: 'DMs' },
+    ],
+  },
+  {
+    name: 'Stock Predictor',
+    href: 'https://github.com/QuantitativeSneezing/ML_FINAL',
+    description: [
+      "For a bit of a change of pace, this last project is actually an ML one- something more recent than my web dev journey. It's a perceptron I trained to predict stock prices for a final project in an ML course; specifically, it's a neural net which predicts whether a stock will outperform the market in the long run. I found the experience to be quite interesting, especially getting into the weeds with a real world dataset that's much \"messier\" than the ones we had done in class, and got to make both good and bad decisions about how to handle and modify my data. Pictured are two of the confusion matrices, as well as some correlations from initial exploratory data analysis. The github file does have a full writeup in a jupyter notebook if you're curious about it.",
+    ],
+    screenshots: [
+      { src: perceptronConfusion50, alt: 'Confusion matrix after 50 epochs' },
+      { src: perceptronConfusion, alt: 'Confusion matrix for the stock predictor' },
+      { src: perceptronCorrelation, alt: 'Correlation matrix from exploratory data analysis' },
     ],
   },
 ]
@@ -84,10 +99,12 @@ function App() {
           <h2>Selected projects</h2>
           {projects.map(({ name, href, description, screenshots }) => (
             <article key={name} className="project">
-              <h3>{href ? <a href={href} className="btn">{name}</a> : name}</h3>
-              {description.map((paragraph, i) => (
-                <p key={i}>{paragraph}</p>
-              ))}
+              <div className="project-text">
+                <h3>{href ? <a href={href} className="btn">{name}</a> : name}</h3>
+                {description.map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
+              </div>
               <div className="gallery">
                 {screenshots.map(({ src, alt }) => (
                   <a key={src} href={src}>
@@ -104,22 +121,28 @@ function App() {
         <h2>Contact</h2>
         <address className="contact">
           <dl>
-            <dt>Email</dt>
-            <dd><a href={`mailto:${email}`} className="btn">{email}</a></dd>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${email}`} className="btn">{email}</a></dd>
+            </div>
 
-            <dt>Resume</dt>
-            <dd><a href={resumeUrl} className="btn">My Resume</a></dd>
+            <div>
+              <dt>Resume</dt>
+              <dd><a href={resumeUrl} className="btn">My Resume</a></dd>
+            </div>
 
-            <dt>Elsewhere</dt>
-            <dd>
-              <ul>
-                {socialLinks.map(({ label, href }) => (
-                  <li key={label}>
-                    <a href={href} className="btn">{label}</a>
-                  </li>
-                ))}
-              </ul>
-            </dd>
+            <div>
+              <dt>Elsewhere</dt>
+              <dd>
+                <ul>
+                  {socialLinks.map(({ label, href }) => (
+                    <li key={label}>
+                      <a href={href} className="btn">{label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
           </dl>
         </address>
       </footer>

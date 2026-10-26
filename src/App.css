@@ -185,3 +185,91 @@
 .hero{
   font-size: var(--step-2);
 }
+.project {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+  padding: 32px;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+  }
+}
+
+.project-text p + p {
+  margin-top: 1em;
+}
+
+/* First screenshot fills the top row; the rest share the row below it */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  a {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  a:first-child {
+    flex-basis: 100%;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  a:not(:first-child) img {
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+#contact {
+  margin-top: auto;
+  padding: 32px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.contact {
+  font-style: normal;
+
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    gap: 16px 48px;
+    margin: 0;
+  }
+
+  dl > div {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  dt {
+    color: var(--text-h);
+    font-weight: 500;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
